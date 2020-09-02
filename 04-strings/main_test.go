@@ -2,9 +2,9 @@ package main
 
 import "testing"
 
-func TestPalindrom(t *testing.T) {
+func TestIsPalindrom(t *testing.T) {
 	s := "otto"
-	ans := Palindrome(s)
+	ans := isPalindrome(s)
 	if !ans == true {
 		t.Errorf("Reverse() %t; want true", ans)
 	}
