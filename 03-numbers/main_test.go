@@ -1,6 +1,16 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
+
+func TestreverseStr(t *testing.T) {
+	reversed := reverseStr("hello")
+	if reversed != "olleh" {
+		t.Errorf("got %s, want olleh", reversed)
+	}
+}
 
 func TestReverseInt(t *testing.T) {
 	ans := reverseInt(12)
@@ -13,5 +23,23 @@ func TestIsPalindrome(t *testing.T) {
 	result := isPalindrome(12321)
 	if result != true {
 		t.Errorf("got %t, want true", result)
+	}
+}
+
+func TestRunningSumOf1dArr(t *testing.T) {
+	var tests = []struct {
+		input []int
+		want  []int
+	}{
+		{[]int{1, 2, 3, 4}, []int{1, 3, 6, 10}},
+		{[]int{1, 1, 1, 1, 1}, []int{1, 2, 3, 4, 5}},
+		{[]int{3, 1, 2, 10, 1}, []int{3, 4, 6, 16, 17}},
+	}
+	for _, tt := range tests {
+		//use reflect.DeepEqual because Go does not allow equality operator with slices bc ref type
+		got := runningSumOf1dArr(tt.input)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got %v, want %v", got, tt.want)
+		}
 	}
 }
