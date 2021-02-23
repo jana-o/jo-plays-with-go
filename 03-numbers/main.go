@@ -2,17 +2,7 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
-
-//reverse string
-func reverseStr(str string) string {
-	words := strings.Fields(str)
-	for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
-		words[i], words[j] = words[j], words[i]
-	}
-	return strings.Join(words, " ")
-}
 
 //reverse integer
 func reverseInt(num int) int {
@@ -67,10 +57,29 @@ func kidsWithGreatesNrOfCandies(candies []int, extraCandies int) []bool {
 	return result
 }
 
+// version2: zero value of bool is false
+func kidsWithGreatesNrOfCandies2(candies []int, extraCandies int) []bool {
+	greatest := 0
+	result := make([]bool, len(candies))
+
+	for _, v := range candies {
+		if v > greatest {
+			greatest = v
+		}
+	}
+	for i, v := range candies {
+		if v+extraCandies >= greatest {
+			result[i] = true
+		}
+	}
+	return result
+}
+
 func main() {
 	// fmt.Println(reverseInt(123))
 	// fmt.Println(isPalindrome(11))
 	// fmt.Println(isPalindrome(110))
 	// fmt.Println(runningSumOf1dArr([]int{1, 2, 3, 4}))
-	fmt.Println(kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3))
+	// fmt.Println(kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3))
+	fmt.Println(kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3))
 }

@@ -64,3 +64,35 @@ func TestkidsWithGreatesNrOfCandies(t *testing.T) {
 		}
 	}
 }
+
+func TestkidsWithGreatesNrOfCandies2(t *testing.T) {
+	type input struct {
+		candies []int
+		extra   int
+	}
+	var tests = []struct {
+		input input
+		want  []bool
+	}{
+		{input{[]int{2, 3, 5, 1, 3}, 3}, []bool{true, true, true, false, true}},
+		{input{[]int{4, 2, 1, 1, 2}, 1}, []bool{true, false, false, false, false}},
+		{input{[]int{12, 1, 12}, 10}, []bool{true, false, true}},
+	}
+	for _, tt := range tests {
+		got := kidsWithGreatesNrOfCandies2(tt.input.candies, tt.input.extra)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got %v, want %v", got, tt.want)
+		}
+	}
+}
+
+func BenchmarkkidsWithGreatesNrOfCandies(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3)
+	}
+}
+func BenchmarkkidsWithGreatesNrOfCandies2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3)
+	}
+}
