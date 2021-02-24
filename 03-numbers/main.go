@@ -5,12 +5,34 @@ import (
 )
 
 //reverse integer
+//constraints from leetcode:
+// If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+//0ms 100%faster and 2.2MB less than 100% of Go submissions
 func reverseInt(num int) int {
 	var r int
+
+	//if num negative -> convert to positve first
+	if num < 0 {
+		num = num * -1
+		for num > 0 {
+			//pop: %10 and x /=10
+			r = r*10 + num%10
+			num = num / 10
+		}
+		//if r is out of range
+		if r > 2147483647 || r < -2147483647 {
+			return 0
+		}
+		return r * -1
+	}
 	for num > 0 {
-		//pop: %10 and x /=10
 		r = r*10 + num%10
 		num = num / 10
+	}
+
+	//if r is out of range
+	if r > 2147483647 || r < -2147483647 {
+		return 0
 	}
 	return r
 }
@@ -92,11 +114,11 @@ func shuffleArr(nums []int, n int) []int {
 }
 
 func main() {
-	// fmt.Println(reverseInt(123))
+	fmt.Println(reverseInt(1534236469))
 	// fmt.Println(isPalindrome(11))
 	// fmt.Println(isPalindrome(110))
 	// fmt.Println(runningSumOf1dArr([]int{1, 2, 3, 4}))
 	// fmt.Println(kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3))
 	// fmt.Println(kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3))
-	fmt.Println(shuffleArr([]int{2, 5, 1, 3, 4, 7}, 3))
+	// fmt.Println(shuffleArr([]int{2, 5, 1, 3, 4, 7}, 3))
 }

@@ -6,10 +6,24 @@ import (
 )
 
 func TestReverseInt(t *testing.T) {
-	ans := reverseInt(12)
-	if ans != 21 {
-		t.Errorf("Reverse(12) = %d; want 21", ans)
+	var tests = []struct {
+		input int
+		want  int
+	}{
+		{123, 321},
+		{-123, -321},
+		{120, 21},
+		{0, 0},
+		{2147483648, 0},
+		{-2147483648, 0},
 	}
+	for _, tt := range tests {
+		got := reverseInt(tt.input)
+		if got != tt.want {
+			t.Errorf("got %d, want %d", got, tt.want)
+		}
+	}
+
 }
 
 func TestIsPalindrome(t *testing.T) {
