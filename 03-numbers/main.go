@@ -23,7 +23,7 @@ func isPalindrome(num int) bool {
 	return num == reverseInt(num)
 }
 
-//Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+//1480: Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
 //Return the running sum of nums.
 func runningSumOf1dArr(nums []int) []int {
 	result := []int{}
@@ -35,7 +35,7 @@ func runningSumOf1dArr(nums []int) []int {
 	return result
 }
 
-// Given the array candies and the integer extraCandies, where candies[i] represents the number of candies that the ith kid has.
+// 1431: Given the array candies and the integer extraCandies, where candies[i] represents the number of candies that the ith kid has.
 // For each kid check if there is a way to distribute extraCandies among the kids such that he or she can have the greatest number of candies among them. Notice that multiple kids can have the greatest number of candies.
 func kidsWithGreatesNrOfCandies(candies []int, extraCandies int) []bool {
 	greatest := 0
@@ -58,6 +58,7 @@ func kidsWithGreatesNrOfCandies(candies []int, extraCandies int) []bool {
 }
 
 // version2: zero value of bool is false
+// 0ms, faster than 100%; 2.3MB
 func kidsWithGreatesNrOfCandies2(candies []int, extraCandies int) []bool {
 	greatest := 0
 	result := make([]bool, len(candies))
@@ -75,11 +76,27 @@ func kidsWithGreatesNrOfCandies2(candies []int, extraCandies int) []bool {
 	return result
 }
 
+//1470: Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+// Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+// 4ms, faster than 94.56%, 3.7MB, less than 98.58% of Go submissions
+func shuffleArr(nums []int, n int) []int {
+	shuffled := make([]int, len(nums))
+	j := 0
+	for i := 0; i < n; i++ {
+		shuffled[j] = nums[i]
+		j++
+		shuffled[j] = nums[i+n]
+		j++
+	}
+	return shuffled
+}
+
 func main() {
 	// fmt.Println(reverseInt(123))
 	// fmt.Println(isPalindrome(11))
 	// fmt.Println(isPalindrome(110))
 	// fmt.Println(runningSumOf1dArr([]int{1, 2, 3, 4}))
 	// fmt.Println(kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3))
-	fmt.Println(kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3))
+	// fmt.Println(kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3))
+	fmt.Println(shuffleArr([]int{2, 5, 1, 3, 4, 7}, 3))
 }
