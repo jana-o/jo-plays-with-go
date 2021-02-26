@@ -98,7 +98,7 @@ func kidsWithGreatesNrOfCandies2(candies []int, extraCandies int) []bool {
 	return result
 }
 
-//1470: Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+// 1470: Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
 // Return the array in the form [x1,y1,x2,y2,...,xn,yn].
 // 4ms, faster than 94.56%, 3.7MB, less than 98.58% of Go submissions
 func shuffleArr(nums []int, n int) []int {
@@ -113,12 +113,43 @@ func shuffleArr(nums []int, n int) []int {
 	return shuffled
 }
 
+// 1512: Given an array of integers nums. A pair (i,j) is called good if nums[i] == nums[j] and i < j.
+// Return the number of good pairs.
+// use hashmap here to find pairs: 0ms, 2MB
+func numIdenticalPairs(nums []int) int {
+	var pairs int
+	hm := make(map[int]int)
+
+	//find count of number occurences of number then store in map
+	for _, n := range nums {
+		pairs += hm[n]
+		hm[n]++
+		fmt.Println("pairs: ", pairs, "hm:", hm) //final hm in ex.: 1:3, 2:1, 3:2
+	}
+	return pairs
+}
+
+// 1512: same as above using two for loops
+func numIdenticalPairsLoop(nums []int) int {
+	var pairs int
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i] == nums[j] {
+				pairs++
+			}
+		}
+	}
+	return pairs
+}
+
 func main() {
-	fmt.Println(reverseInt(1534236469))
+	// fmt.Println(reverseInt(1534236469))
 	// fmt.Println(isPalindrome(11))
 	// fmt.Println(isPalindrome(110))
 	// fmt.Println(runningSumOf1dArr([]int{1, 2, 3, 4}))
 	// fmt.Println(kidsWithGreatesNrOfCandies([]int{2, 3, 5, 1, 3}, 3))
 	// fmt.Println(kidsWithGreatesNrOfCandies2([]int{2, 3, 5, 1, 3}, 3))
 	// fmt.Println(shuffleArr([]int{2, 5, 1, 3, 4, 7}, 3))
+	fmt.Println(numIdenticalPairs([]int{1, 2, 3, 1, 1, 3}))
+	// fmt.Println(numIdenticalPairsLoop([]int{1, 2, 3, 1, 1, 3}))
 }

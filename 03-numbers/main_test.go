@@ -124,3 +124,20 @@ func TestShuffleArr(t *testing.T) {
 		}
 	}
 }
+
+func TestnumIdenticalPairs(t *testing.T) {
+	var tests = []struct {
+		input []int
+		want  int
+	}{
+		{[]int{1, 2, 3, 1, 1, 3}, 4},
+		{[]int{1, 1, 1, 1}, 6},
+		{[]int{1, 2, 3}, 0},
+	}
+	for _, tt := range tests {
+		got := numIdenticalPairs(tt.input)
+		if !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("got %v, want %v", got, tt.want)
+		}
+	}
+}
