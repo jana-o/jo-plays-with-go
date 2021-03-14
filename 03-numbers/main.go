@@ -129,6 +129,19 @@ func numIdenticalPairs(nums []int) int {
 	return pairs
 }
 
+//remove duplicates in slice
+func removeDuplicates(a []int) []int {
+	result := []int{}
+	seen := map[int]int{}
+	for _, val := range a {
+		if _, ok := seen[val]; !ok {
+			result = append(result, val)
+			seen[val] = val
+		}
+	}
+	return result
+}
+
 // 1512: same as above using two for loops
 func numIdenticalPairsLoop(nums []int) int {
 	var pairs int
